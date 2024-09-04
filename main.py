@@ -1,8 +1,13 @@
-import webview
+# import webview
+# window = webview.create_window('Woah dude!', 'test.html')
+# webview.start(custom_logic, window)
 
-def custom_logic(window):
-    window.toggle_fullscreen()
-    window.evaluate_js('alert("Nice one brother")')
 
-window = webview.create_window('Woah dude!', html='<h1>Woah dude!<h1>')
-webview.start(custom_logic, window)
+from core.base import Type
+from core.element.element import Element
+
+print(Element(
+    Type("div"),
+    className="hi"
+))
+
