@@ -9,3 +9,4 @@ class Types:
     h4 = ElementType("h4")
     h5 = ElementType("h5")
     h6 = ElementType("h6")
+    button = ElementType("button")

@@ -14,7 +14,7 @@ class Element:
         self.id = id
         self.className = className
         self.innerHTML = innerHTML
-        self.style = style
+        self.style = style or Style()
         self._parent: Optional[Self] = None
         self._childs: list[Self] = []
 
