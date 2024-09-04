@@ -1,12 +1,12 @@
 from pymium import * 
-from core.base.style import Style
 
+style= Style(color="red")
 
-aDiv = Element(Types.div, "E")
-nDiv = Element(Types.h1, "N", innerHTML="Hello")
+container = Element(Types.div, "main-container")
+heading = Element(Types.h1, "a-heading", innerHTML="Hello", style=style)
+
 space = Space("Main")
-space.append(aDiv)
-aDiv.append(nDiv)
-print(str(Style(background_color= "red", color= "green")))
+space.append(container)
+container.append(heading)
 
 run(space)

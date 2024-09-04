@@ -14,7 +14,7 @@ class Element:
         self.id = id
         self.className = className
         self.innerHTML = innerHTML
-        self.style = style if style else Style()
+        self.style = style
         self._parent: Optional[Self] = None
         self._childs: list[Self] = []
 
@@ -39,4 +39,4 @@ class Element:
         return f'"{text}"'
 
     def __str__(self):
-        return f"<{self.elementType}{' class = ' + self._wrap_with_string(self.className) if self.className else ''}{' id = ' + self._wrap_with_string(self.id) if self.id else ''}>{self.innerHTML if self.innerHTML else ''}{''.join([str(element) for element in self._childs])}</{self.elementType}>"
+        return f"<{self.elementType}{' class = ' + self._wrap_with_string(self.className) if self.className else ''}{' id = ' + self._wrap_with_string(self.id) if self.id else ''}{' style = ' + self._wrap_with_string(str(self.style)) if self.style else ''}>{self.innerHTML if self.innerHTML else ''}{''.join([str(element) for element in self._childs])}</{self.elementType}>"
