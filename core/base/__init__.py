@@ -1,1 +1,1 @@
-from .types import Type
+from .prebuilt_types import Types

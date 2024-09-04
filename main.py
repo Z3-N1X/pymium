@@ -1,19 +1,18 @@
 # import webview
-# window = webview.create_window('Woah dude!', 'test.html')
-# webview.start(custom_logic, window)
 
-
-from core.base import Type
+# window = webview.create_window('Transparency Test', "file.html", transparent=True, frameless=True, width=300, height=150, on_top=True)
+# webview.start()
+from core.base import Types
 from core.element import Element, handler
 from core import Space
 
 
 def start():
-    aDiv = Element(Type("div"), "E")
-    nDiv = Element(Type("div"), "N")
-    space = Space()
+    aDiv = Element(Types.div, "E")
+    nDiv = Element(Types.h1, "N")
+    space = Space("Main")
     space.append(aDiv)
     aDiv.append(nDiv)
-    print([x.id for x in aDiv.childs])
+    print(str(space))
 
 start()

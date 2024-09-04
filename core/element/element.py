@@ -1,9 +1,9 @@
-from core.base import Type
+from core.base.types import ElementType
 from typing import Optional, Self
 
 class Element:
     def __init__(self,
-                 elementType: Type,
+                 elementType: ElementType,
                  id: Optional[str] = None,
                  className: Optional[str] = None,
                  innerHTML: Optional[str] = None,
@@ -37,4 +37,4 @@ class Element:
         return f'"{text}"'
 
     def __str__(self):
-        return f"<{self.elementType}{' class = ' + self._wrap_with_string(self.className) if self.className else ''}{' id = ' + self._wrap_with_string(self.id) if self.id else ''}>{self.innerHTML if self.innerHTML else ''}</{self.elementType}>"
+        return f"<{self.elementType}{' class = ' + self._wrap_with_string(self.className) if self.className else ''}{' id = ' + self._wrap_with_string(self.id) if self.id else ''}>{self.innerHTML if self.innerHTML else ''}{''.join([str(element) for element in self._childs])}</{self.elementType}>"
