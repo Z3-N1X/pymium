@@ -1,4 +1,5 @@
 from core.base.types import ElementType
+from core.base.style import Style
 from typing import Optional, Self
 
 class Element:
@@ -7,13 +8,14 @@ class Element:
                  id: Optional[str] = None,
                  className: Optional[str] = None,
                  innerHTML: Optional[str] = None,
-                 parent: Optional[Self] = None
+                 style: Optional[Style] = None
                  ):
         self.elementType = elementType
         self.id = id
         self.className = className
         self.innerHTML = innerHTML
-        self._parent = parent
+        self.style = style if style else Style()
+        self._parent: Optional[Self] = None
         self._childs: list[Self] = []
 
     @property
