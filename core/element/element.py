@@ -14,10 +14,24 @@ class Element:
         self.className = className
         self.innerHTML = innerHTML
         self._parent = parent
+        self._childs: list[Self] = []
 
     @property
     def parent(self) -> Optional[Self]:
         return self._parent
+    
+    @parent.setter
+    def parent(self, parent:Self):
+        self._parent = parent
+
+    @property
+    def childs(self) -> list[Self]:
+        return self._childs
+    
+    def append(self, *elements: Self) -> None:
+        for element in elements:
+            element.parent = self.__class__
+            self._childs.append(element)
     
     def _wrap_with_string(self, text: str) -> str:
         return f'"{text}"'
