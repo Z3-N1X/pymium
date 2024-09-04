@@ -3,21 +3,17 @@ from core import Space
 def getElementById(space: Space, id: str) -> list:
     results = list()
 
-    for element in space.elements:
-        if element.id == id:
-            results.append(element)
+    return find_in_list_by_id(space.elements, id)
 
-def find_in_list(choosen_list: list, id: str) -> list:
+def find_in_list_by_id(choosen_list: list, id: str) -> list:
     results = list()
 
     for element in choosen_list:
         if type(element) == list:
-            results = results + find_in_list(element, id)
+            results = results + find_in_list_by_id(element, id)
             continue
 
         if element.id == id:
             results.append(element)
-
-
     return results
 

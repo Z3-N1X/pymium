@@ -4,10 +4,14 @@
 
 
 from core.base import Type
-from core.element.element import Element
+from core.element import Element
+from core import Space
 
-print(Element(
-    Type("div"),
-    className="hi"
-))
 
+def start():
+    aDiv = Element(Type("div"), "E")
+    space = Space()
+    space.append(aDiv)
+    print(space.elements)
+
+start()
