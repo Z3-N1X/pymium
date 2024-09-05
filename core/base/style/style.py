@@ -13,7 +13,7 @@ class Style:
         
     def __str__(self) -> None | str:
         if not self.styles:
-            return None
+            return ""
         results = ""
         for key in self.styles.keys():
             results += key.replace("_","-") + ":" + self.styles[key] + ";"

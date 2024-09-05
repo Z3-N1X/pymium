@@ -1,4 +1,4 @@
-from pymium import Space
+from core import Space
 
 def getElementById(space: Space, id: str) -> list:
     results = list()

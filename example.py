@@ -6,7 +6,7 @@ button_style.add_style(background = "blue")
 
 container = Element(Types.div, "main-container")
 heading = Element(Types.h1, "a-heading", innerHTML="Hello", style=base_style)
-abutton = Element(Types.button, "a-button", 'button-class', 'you wassup', button_style)
+abutton = Element(Types.button, "a-button", 'button-class', 'you wassup')
 
 space = Space("Main")
 space.append(container)

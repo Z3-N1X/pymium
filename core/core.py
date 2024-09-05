@@ -1,5 +1,5 @@
 from typing import List, Self, Optional
-from pymium.element import Element
+from core.element import Element
 class Space:
     def __init__(self, title: str) -> None:
         self._elements: List[Element] = list()

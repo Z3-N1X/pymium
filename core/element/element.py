@@ -1,5 +1,5 @@
-from pymium.base.types import ElementType
-from pymium.base.style import Style
+from core.base.types import ElementType
+from core.base.style import Style
 from typing import Optional, Self
 
 class Element:
@@ -39,4 +39,4 @@ class Element:
         return f'"{text}"'
 
     def __str__(self):
-        return f"<{self.elementType}{' class = ' + self._wrap_with_string(self.className) if self.className else ''}{' id = ' + self._wrap_with_string(self.id) if self.id else ''}{' style = ' + self._wrap_with_string(str(self.style)) if self.style else ''}>{self.innerHTML if self.innerHTML else ''}{''.join([str(element) for element in self._childs])}</{self.elementType}>"
+        return f"<{self.elementType}{' class = ' + self._wrap_with_string(self.className) if self.className else ''}{' id = ' + self._wrap_with_string(self.id) if self.id else ''}{' style = ' + self._wrap_with_string(str(self.style)) if str(self.style) else ''}>{self.innerHTML if self.innerHTML else ''}{''.join([str(element) for element in self._childs])}</{self.elementType}>"
