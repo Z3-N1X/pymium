@@ -1,6 +1,6 @@
 from pymium import * 
 
-base_style= Style(color="red")
+base_style= Style(color="black")
 button_style = base_style.clone()
 button_style.add_style(background = "blue")
 
