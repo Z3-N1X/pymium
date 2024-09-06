@@ -1,6 +1,7 @@
 from typing import List, Self, Optional
-from core.element import Element
-from core.base.style import Style
+from pymium.core.element import Element
+from pymium.core.base.style import Style
+from pymium.core.assets.templates import templates
 class Space:
     def __init__(self, title: str, style: Optional[Style] = None) -> None:
         self._elements: List[Element] = list()
@@ -19,10 +20,9 @@ class Space:
     
     def __str__(self) -> str:
         result: str = ""
-        with open(r"core\assets\templates\base.html") as f:
-            text = f.read()
-            result = text.replace("{$space}", f"<body {' style = ' + self._wrap_with_string(str(self.style)) if str(self.style) else ''}>{''.join([str(element) for element in self._elements])}</body>").replace("{$using pymium}", "").replace("{$title}", self.title)
-            result+="""<script src="qrc:///qtwebchannel/qwebchannel.js"></script><script language="JavaScript">
+        text = templates.base_html
+        result = text.replace("{$space}", f"<body {' style = ' + self._wrap_with_string(str(self.style)) if str(self.style) else ''}>{''.join([str(element) for element in self._elements])}</body>").replace("{$using pymium}", "").replace("{$title}", self.title)
+        result+="""<script src="qrc:///qtwebchannel/qwebchannel.js"></script><script language="JavaScript">
         new QWebChannel(qt.webChannelTransport, function (channel) {
           window.handler = channel.objects.handler;
           handler.test(function(retVal) {

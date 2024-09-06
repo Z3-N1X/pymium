@@ -1,5 +1,5 @@
-from core.base.types import ElementType
-from core.base.style import Style
+from pymium.core.base.types import ElementType
+from pymium.core.base.style import Style
 from typing import Optional, Self
 
 class Element:

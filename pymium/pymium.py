@@ -1,9 +1,9 @@
 # import webview
 
-from core.base import Types
-from core.element import Element, handler
-from core.base.style import Style
-from core import Space
+from pymium.core.base import Types
+from pymium.core.element import Element, handler
+from pymium.core.base.style import Style
+from pymium.core import Space
 
 
 

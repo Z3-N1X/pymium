@@ -1,4 +1,4 @@
-{$using pymium}
+base_html = """{$using pymium}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,4 +8,4 @@
     <title>{$title}</title>
 </head>
 {$space}
-</html>
+</html>"""
