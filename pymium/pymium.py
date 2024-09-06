@@ -15,6 +15,7 @@ from PyQt5.QtWebChannel import QWebChannel
 import sys
 import os
 
+
 class MainWindow(QMainWindow):
     def __init__(self, space: Space, title: str, width: int = 800, height: int = 600, frameless: bool = False, on_top: bool = False):
         super().__init__()
@@ -25,6 +26,7 @@ class MainWindow(QMainWindow):
         view = QtWebEngineWidgets.QWebEngineView()
         html = str(space)
         view.setHtml(html)
+        print(html)
         self.setWindowFlags(
             self.windowFlags() 
             | QtCore.Qt.FramelessWindowHint if frameless else self.windowFlags() 
@@ -33,7 +35,7 @@ class MainWindow(QMainWindow):
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         
         self.channel = QWebChannel()
-        self.handler = CallHandler()
+        self.handler = CallHandler(space)
         self.channel.registerObject('handler', self.handler)
         view.page().setWebChannel(self.channel)
         # self.setWindowOpacity(0.5)
@@ -41,7 +43,9 @@ class MainWindow(QMainWindow):
 
 
 class CallHandler(QObject):
-
+    def __init__(self, space: Space):
+        super().__init__()
+        self.space=space
 
     @pyqtSlot(result=QVariant)
     def test(self):
@@ -51,9 +55,26 @@ class CallHandler(QObject):
     # take an argument from javascript - JS:  handler.test1('hello!')
     @pyqtSlot(QVariant, result=QVariant)
     def test1(self, args):
-      print('i got')
-      print(args)
-      return "ok"
+        element_data = str(args).split(":")
+        element_name = element_data[0]
+        element_id = element_data[1]    if element_data[2]!="noId" else None
+        element_class = element_data[2] if element_data[2]!="noClass" else None
+        print(element_name,element_id,element_class)
+        id_elements = handler.getElementById(self.space, element_id)
+        print(id_elements)
+        print(self.space.title)
+        targets = []
+        print("e")
+        for element in id_elements:
+          print(element.className)
+          if element.className == element_class and element.elementType == element_name:
+            targets.append(element)
+    
+        for element in targets:
+            print("s")
+         
+            element.onclick()
+        return "ok"
 
     @pyqtSlot(QVariant)
     def send_to_server(self, *args):

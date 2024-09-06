@@ -10,7 +10,9 @@ button_style.add_style(background = "blue")
 
 container = Element(Types.div, "main-container", style=base_style)
 heading = Element(Types.h1, "a-heading", innerHTML="Hello", style=Style(text_align="center"))
-abutton = Element(Types.button, "a-button", 'button-class', 'you wassup')
+def e():
+    print("bobux")
+abutton = Element(Types.button, "a-button", 'button-class', 'you wassup', onclick=e)
 
 space = Space("Main")
 space.append(container)

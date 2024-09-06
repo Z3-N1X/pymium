@@ -22,18 +22,5 @@ class Space:
         result: str = ""
         text = templates.base_html
         result = text.replace("{$space}", f"<body {' style = ' + self._wrap_with_string(str(self.style)) if str(self.style) else ''}>{''.join([str(element) for element in self._elements])}</body>").replace("{$using pymium}", "").replace("{$title}", self.title)
-        result+="""<script src="qrc:///qtwebchannel/qwebchannel.js"></script><script language="JavaScript">
-        new QWebChannel(qt.webChannelTransport, function (channel) {
-          window.handler = channel.objects.handler;
-          handler.test(function(retVal) {
-            // console.error as console.log message don't show up in the python console
-            
-          })
-          handler.test1('pizza')
-          document.getElementById('a-button').onclick = function() {
-           handler.test1('pizza')
-          }
-        });
         
-      </script>"""
         return result
