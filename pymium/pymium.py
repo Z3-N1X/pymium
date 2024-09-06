@@ -23,9 +23,9 @@ class PymiumWindow(QMainWindow):
         self.setWindowTitle(title)
         self.setFixedWidth(width)
         self.setFixedHeight(height)
-        view = QtWebEngineWidgets.QWebEngineView()
+        self.view = QtWebEngineWidgets.QWebEngineView()
         html = str(space)
-        view.setHtml(html)
+        self.view.setHtml(html)
 
         self.setWindowFlags(
             self.windowFlags() 
@@ -37,9 +37,11 @@ class PymiumWindow(QMainWindow):
         self.channel = QWebChannel()
         self.handler = CallHandler(space)
         self.channel.registerObject('handler', self.handler)
-        view.page().setWebChannel(self.channel)
+        self.view.page().setWebChannel(self.channel)
         # self.setWindowOpacity(0.5)
-        self.setCentralWidget(view)
+        self.setCentralWidget(self.view)
+    def reload_html(self, space:Space):
+        self.view.setHtml(str(space))
 
 
 class CallHandler(QObject):
@@ -66,15 +68,22 @@ class CallHandler(QObject):
             element.onclick()
         return "ok"
 
+class PyWindow:
+    def __init__(self, space:Space, width: int = 800, height: int = 600, always_on_top: bool = False, frameless: bool= False):
+        self.app = QApplication(sys.argv)
 
 
-def run(space:Space, width: int = 800, height: int = 600, always_on_top: bool = False, frameless: bool= False):
-    app = QApplication(sys.argv)
+        self.window = PymiumWindow(space, space.title, width, height, frameless, always_on_top)
+
+    def run(self):
+        
+        self.window.show()
 
 
-    window = PymiumWindow(space, space.title, width, height, frameless, always_on_top)
-    window.show()
+        self.app.exec()
 
+    def set_html(self,space):
+        self.window.reload_html(space)
+    
 
-    app.exec()
     
