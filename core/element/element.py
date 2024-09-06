@@ -37,6 +37,12 @@ class Element:
     
     def _wrap_with_string(self, text: str) -> str:
         return f'"{text}"'
+    
+    def customid(self):
+        idName = self.id or "noId"
+        className = self.className or "noClass"
+        elementType = self.elementType
+        return f"{elementType}:{idName}:{className}"
 
     def __str__(self):
         return f"<{self.elementType}{' class = ' + self._wrap_with_string(self.className) if self.className else ''}{' id = ' + self._wrap_with_string(self.id) if self.id else ''}{' style = ' + self._wrap_with_string(str(self.style)) if str(self.style) else ''}>{self.innerHTML if self.innerHTML else ''}{''.join([str(element) for element in self._childs])}</{self.elementType}>"
