@@ -65,7 +65,10 @@ class CallHandler(QObject):
             targets.append(element)
 
         for element in targets: 
-            element.onclick()
+            if element.onclick.__code__.co_argcount > 0:
+                element.onclick(element)
+            else:
+                element.onclick()
         return "ok"
 
 class PyWindow:
@@ -83,7 +86,4 @@ class PyWindow:
         self.app.exec()
 
     def set_html(self,space):
-        self.window.reload_html(space)
-    
-
-    
+        self.window.reload_html(space) 

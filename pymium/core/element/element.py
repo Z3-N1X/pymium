@@ -19,6 +19,7 @@ class Element:
         self._parent: Optional[Self] = None
         self._childs: list[Self] = []
         self.onclick = onclick
+        self._att = dict()
 
     @property
     def parent(self) -> Optional[Self]:
@@ -42,6 +43,9 @@ class Element:
     
     def _wrap_with_single_string(self, text: str) -> str:
         return f"'{text}'"
+
+    def add_attributes(self, **attributes):
+        self._att = attributes | self._att
     
     def customid(self) -> str:
         idName = self.id or "noId"
@@ -50,4 +54,4 @@ class Element:
         return f"{elementType}:{idName}:{className}"
 
     def __str__(self):
-        return f"<{self.elementType}{' class = ' + self._wrap_with_string(self.className) if self.className else ''}{' id = ' + self._wrap_with_string(self.id) if self.id else ''}{' onclick = ' + self._wrap_with_string('sendtopy('+self._wrap_with_single_string(self.customid())+')') if self.onclick else ''}{' style = ' + self._wrap_with_string(str(self.style)) if str(self.style) else ''}>{self.innerHTML if self.innerHTML else ''}{''.join([str(element) for element in self._childs])}</{self.elementType}>"
+        return f"<{self.elementType}{' class = ' + self._wrap_with_string(self.className) if self.className else ''}{' id = ' + self._wrap_with_string(self.id) if self.id else ''}{' onclick = ' + self._wrap_with_string('sendtopy('+self._wrap_with_single_string(self.customid())+')') if self.onclick else ''}{' style = ' + self._wrap_with_string(str(self.style)) if str(self.style) else ''}{''.join([' ' + att + '=' + self._wrap_with_single_string(self._att[att]) for att in self._att.keys()])}>{self.innerHTML if self.innerHTML else ''}{''.join([str(element) for element in self._childs])}</{self.elementType}>"

@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
 name='pymium',
-version='0.1.0',
+version='0.3.5',
 author='Z3N',
 author_email='iliya.souri7890@example.com',
 description='Windows application creator',
